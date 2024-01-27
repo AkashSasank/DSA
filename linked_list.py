@@ -1,6 +1,3 @@
-import copy
-
-
 class Node:
     """
     A Node. It has a value and a pointer to next node
@@ -87,8 +84,8 @@ class LinkedList:
         while temp.next:
             new_tail = temp
             temp = temp.next
-        # Assign the second last node as tail and
-        # its next asn None
+        # Assign the second last node as tail, and
+        # it's next as None
         new_tail.next = None
         self.tail = new_tail
         # Decrement length and see if its 0.
