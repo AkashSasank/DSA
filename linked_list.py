@@ -20,7 +20,6 @@ class LinkedList:
         new_node = Node(value)
         self.head = new_node
         self.tail = new_node
-        self.head.next = self.tail
         self.length = 1
 
     def print_list(self):
@@ -178,6 +177,53 @@ class LinkedList:
             temp.value = value
             return True
         return False
+
+    def insert(self, index, value):
+        """
+        Insert a new node to index
+        complexity: O(n)
+        :param index:
+        :param value:
+        :return:
+        """
+        if index < 0 or index > self.length:
+            return False
+
+        new_node = Node(value)
+        if index == 0:
+            self.prepend(value)
+        elif index == self.length:
+            self.append(value)
+        else:
+            node_before_index = self.get(index - 1)
+            node_at_index = self.get(index)
+            new_node.next = node_at_index
+            node_before_index.next = new_node
+            self.length += 1
+        return True
+
+    def delete(self, index):
+        """
+        Delete Node at an index
+        complexity: O(n)
+        :param index:
+        :return:
+        """
+        if index < 0 or index >= self.length:
+            return False
+        if index == 0:
+            self.pop_first()
+        elif index == self.length - 1:
+            self.pop()
+        else:
+            before_node = self.get(index - 1)
+            next_node = self.get(index + 1)
+            before_node.next = next_node
+            self.length -= 1
+        if self.length == 0:
+            self.head = None
+            self.tail = None
+        return True
 
 
 if __name__ == "__main__":
